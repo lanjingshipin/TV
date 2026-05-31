@@ -2,15 +2,17 @@ name: 蓝鲸自动打包机
 
 on:
   push:
-    branches: [ "release" ]
+    branches: [ "release", "main" ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: 获取源码
+    - name: 获取源码及所有核心零件
       uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
 
     - name: 配置 Java 环境
       uses: actions/setup-java@v4
