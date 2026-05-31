@@ -21,7 +21,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: 伪造官方本地配置文件（填平报错坑）
+    - name: 伪造官方本地配置文件
       run: |
         touch local.properties
         echo "storeFile=dummy" >> local.properties
@@ -32,8 +32,8 @@ jobs:
     - name: 激活编译引擎
       run: chmod +x gradlew
 
-    - name: 开始全自动编译安装包
-      run: ./gradlew assembleDebug --stacktrace
+    - name: 精准编译 Java 手机版和电视版
+      run: ./gradlew assembleMobileJavaDebug assembleLeanbackJavaDebug --stacktrace
 
     - name: 输出并提取 APK 文件
       uses: actions/upload-artifact@v4
