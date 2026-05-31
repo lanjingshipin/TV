@@ -32,8 +32,8 @@ jobs:
     - name: 激活编译引擎
       run: chmod +x gradlew
 
-    - name: 终极打包手机版和电视版
-      run: ./gradlew assembleMobileDebug assembleLeanbackDebug --stacktrace
+    - name: 智能打包所有 Java 版本
+      run: ./gradlew assembleJavaDebug --stacktrace
 
     - name: 输出并提取 APK 文件
       uses: actions/upload-artifact@v4
