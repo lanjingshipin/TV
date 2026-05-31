@@ -21,13 +21,21 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: 伪造官方本地配置文件（填平报错坑）
+      run: |
+        touch local.properties
+        echo "storeFile=dummy" >> local.properties
+        echo "storePassword=dummy" >> local.properties
+        echo "keyAlias=dummy" >> local.properties
+        echo "keyPassword=dummy" >> local.properties
+
     - name: 激活编译引擎
       run: chmod +x gradlew
 
     - name: 开始全自动编译安装包
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
-    - name: 输出并上传 APK 文件
+    - name: 输出并提取 APK 文件
       uses: actions/upload-artifact@v4
       with:
         name: 蓝鲸影院-专属版APP
